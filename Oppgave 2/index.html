@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funksjons-argument oppgave</title>
+</head>
+
+<body>
+    <h3>Hvis du klikker på disse tekstene blir de kopiert under, men ting skjer med dem:</h3>
+    <div onclick="copyText(this, 'background-color: yellow')">Bakgrunnen på denne blir gul</div>
+    <div onclick="copyText(this, 'color: red')">Teksten her blir rød</div>
+    <div onclick="copyText(this, 'font-weight: bold')">Denne blir fet</div>
+    <div onclick="copyText(this, 'text-decoration: underline dashed red')">Drivefeil</div>
+    <div onclick="copyText(this, 'text-decoration: line-through')">Denne blir streket ut</div>
+    <div id="outputDiv"></div>
+
+    <script>
+        var outputDiv = document.getElementById("outputDiv");
+
+        function copyText(element, styling){
+            outputDiv.innerHTML = "<div style='" + styling + ";'>" + element.innerHTML + "</div>";
+        }
+    </script>
+</body>
+
+</html>

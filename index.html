@@ -2,28 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funksjons-argument oppgave</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 
 <body>
-    <h3>Hvis du klikker på disse tekstene blir de kopiert under, men ting skjer med dem:</h3>
-    <div onclick="copyText(this, 'background-color: yellow')">Bakgrunnen på denne blir gul</div>
-    <div onclick="copyText(this, 'color: red')">Teksten her blir rød</div>
-    <div onclick="copyText(this, 'font-weight: bold')">Denne blir fet</div>
-    <div onclick="copyText(this, 'text-decoration: underline dashed red')">Drivefeil</div>
-    <div onclick="copyText(this, 'text-decoration: line-through')">Denne blir streket ut</div>
-    <div id="outputDiv"></div>
+	<div>Min: </div>
+	<input id="numMin" type="number" value="0">
+	<div>Max: </div>
+	<input id="numMax" type="number" value="100">
+	<br />
+	<br />
+	<br />
+	<br />
+	<div>Gjettning:</div>
+	<input id="input" type="number" placeholder="Gjett ett tall" />
+	<button onclick="guessNumber()">Gjett</button>
+	<button onclick="reset()">Reset</button>
+	<br />
+	<div id="history"></div>
+	<div id="correct" style="background: green;"></div>
 
-    <script>
-        var outputDiv = document.getElementById("outputDiv");
+	<script>
+		var historyDiv = document.getElementById("history");
+		var correctDiv = document.getElementById("correct");
+		var input = document.getElementById("input");
+		var numMin = document.getElementById("numMin");
+		var numMax = document.getElementById("numMax");
 
-        function copyText(element, styling){
-            outputDiv.innerHTML = "<div style='" + styling + ";'>" + element.innerHTML + "</div>";
-        }
-    </script>
+		var randomNum;
+
+		reset();
+
+		function reset() {
+			randomNum = Math.floor(Math.random() * numMax.value + 1) + parseInt(numMin.value);
+			console.log(randomNum);
+			historyDiv.innerHTML = "";
+			correctDiv.innerHTML = "";
+		}
+
+		function guessNumber() {
+			if (!correctDiv.innerHTML) {
+				if (input.value == randomNum) {
+					correctDiv.innerHTML = input.value + " var riktig svar!"
+				}
+				else if (input.value < randomNum) {
+					if (input.value < numMin.value) {
+						historyDiv.innerHTML += "<br/>" + input.value + " er lavere en min-verdien som er: " + numMax.value;
+					}
+					else {
+						historyDiv.innerHTML += "<br/>" + input.value + " er for lavt"
+					}
+				}
+				else {
+					if (input.value > parseInt(numMax.value) + 1) {
+						historyDiv.innerHTML += "<br/>" + input.value + " er høyere en max-verdien som er: " + numMax.value;
+					}
+					else {
+						historyDiv.innerHTML += "<br/>" + input.value + " er for høyt"
+					}
+				}
+			}
+		}
+	</script>
 </body>
 
 </html>
